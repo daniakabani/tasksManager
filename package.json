@@ -1,0 +1,46 @@
+{
+  "name": "tasks_manager_service",
+  "version": "1.0.0",
+  "description": "Tasks management API and services",
+  "main": "main/backend/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "cd main/backend && npm run migrate",
+    "rollback": "cd main/backend && npm run rollback",
+    "reset": "npm run rollback && npm run migrate && npm run seed",
+    "start": "node main/backend/web/www.js",
+    "dev": "nodemon main/backend/web/www.js",
+    "app": "cd main/frontend && npm start",
+    "resolve": "npm i && cd main/frontend && npm i",
+    "seed": "cd main/backend && npm run seed",
+    "prettier": "npx prettier --write main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/daniakabani/tasksManager.git"
+  },
+  "keywords": [
+    "car",
+    "marketplace"
+  ],
+  "author": "dani alakabani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daniakabani/tasksManager/issues"
+  },
+  "homepage": "https://github.com/daniakabani/carListingMarketplace#readme",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcrypt": "^5.0.1",
+    "daniakabani": "./main/backend",
+    "dotenv": "^8.6.0",
+    "express": "^4.17.1",
+    "knex": "^0.21.21",
+    "objection": "^2.2.16",
+    "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13",
+    "prettier": "^2.4.1"
+  }
+}
