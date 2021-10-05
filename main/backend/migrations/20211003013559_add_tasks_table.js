@@ -7,7 +7,9 @@ exports.up = function (knex) {
       .unsigned()
       .references("users.id")
       .onDelete("CASCADE");
-    table.string("status");
+    table.string("status").defaultTo("in-progress");
+    table.string("title", 75);
+    table.string("description", 255);
     table.timestamp("created_at");
     table.timestamp("updated_at");
     table.timestamp("deleted_at");

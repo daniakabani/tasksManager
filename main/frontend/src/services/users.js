@@ -1,4 +1,4 @@
-import { HttpClient } from "../helpers/index";
+import { HttpClient } from "helpers";
 
 const Login = (body) => {
   return HttpClient({

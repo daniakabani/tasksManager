@@ -27,11 +27,31 @@ const GlobalStyle = styled.div`
           .tags {
             margin-bottom: 20px;
           }
+          textarea {
+            display: block;
+            width: 100%;
+            background: #f5f5f5;
+            font-size: 14px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            padding: 13px 20px;
+            font-weight: 300;
+            transition: 0.3s ease all;
+            margin-bottom: 20px;
+            &::placeholder {
+              color: #bcbcbc;
+            }
+            &:focus {
+              background: white;
+              box-shadow: 0 0 15px rgba(0, 0, 0, 0.07);
+              outline: none;
+            }
+          }
         }
       }
       .content {
         padding: 7vh 13vw;
-        header {
+        > header {
           margin-bottom: 40px;
           display: flex;
           align-items: center;
@@ -51,65 +71,84 @@ const GlobalStyle = styled.div`
           }
         }
         .filters {
-          h3 {
+          margin-bottom: 20px;
+          h5 {
             font-weight: bold;
             text-transform: capitalize;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
           }
           .actions {
             display: flex;
             align-items: flex-start;
             justify-content: flex-start;
-            div {
+            span {
               max-width: 300px;
-              margin-right: 30px;
-            }
-            input {
-              max-width: 300px;
+              margin-right: 10px;
+              border: 1px solid #057bff;
+              padding: 10px;
+              border-radius: 7px;
+              cursor: pointer;
+              &.active {
+                background-color: #057bff;
+              }
             }
           }
         }
         .list-view {
-          ul.api-data {
+          .api-data {
             list-style: none;
             padding: 0;
             display: flex;
             align-items: center;
             justify-content: flex-start;
             flex-wrap: wrap;
-            li {
+            .task-content {
               width: 100%;
-              max-width: 300px;
-              min-height: 300px;
               background-color: #eee;
               border-radius: 7px;
               margin: 0 30px 30px 0;
               padding: 20px;
-              box-shadow: 0px 10px 50px -10px rgba(173, 194, 217, 0.5);
+              box-shadow: 0 10px 50px -10px rgba(173, 194, 217, 0.5);
               transition: ease all 0.3s;
               display: flex;
-              align-items: center;
-              justify-content: center;
-              flex-direction: column;
+              align-items: flex-start;
+              justify-content: flex-start;
               position: relative;
               overflow: hidden;
-              &:hover {
-                transform: translate(-10px, -10px);
+              header {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                margin-right: 20px;
+                h4 {
+                  display: flex;
+                  align-items: center;
+                  span {
+                    display: block;
+                    font-size: 12px;
+                    padding: 5px;
+                    border-radius: 7px;
+                    border: 1px solid #057bff;
+                    margin-left: 5px;
+                  }
+                }
+              }
+              article {
+                margin-right: 20px;
+                max-width: 265px;
+                width: 100%;
+              }
+              .subs {
+                margin-right: 20px;
+                ul {
+                  margin-top: 10px;
+                  list-style: none;
+                }
               }
               h2,
               h3 {
                 text-transform: capitalize;
-              }
-              .featured {
-                background-color: #2ecc71;
-                padding: 10px 20px;
-                border-radius: 8px;
-                width: 100%;
-                text-align: center;
-                position: absolute;
-                top: 10%;
-                transform: rotate(-45deg);
-                left: -30%;
               }
               .actions {
                 display: flex;
@@ -164,22 +203,6 @@ const GlobalStyle = styled.div`
           border-radius: 7px;
           transform: translateX(-50%);
           box-shadow: 0px 10px 50px -10px rgba(173, 194, 217, 0.5);
-          ul {
-            padding: 0;
-            margin: 0;
-            list-style: none;
-            li {
-              padding: 10px 0;
-              a {
-                text-decoration: underline;
-              }
-              span {
-                font-weight: bold;
-                min-width: 150px;
-                display: inline-block;
-              }
-            }
-          }
         }
       }
     }

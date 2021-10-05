@@ -1,4 +1,4 @@
-import { HttpClient } from "../helpers/index";
+import { HttpClient } from "helpers";
 
 const getRoleByID = (id) => {
   return HttpClient({

@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import InputField from "../../components/inputField";
+import InputField from "components/inputField";
 import { useHistory } from "react-router-dom";
-import Button from "../../components/button";
-import { Login } from "../../services/users";
-import { getRoleByID } from "../../services/roles";
-import { FormSerializer } from "../../helpers";
-import Context from "../../providers/context";
+import Button from "components/button";
+import { Login } from "services/users";
+import { getRoleByID } from "services/roles";
+import { FormSerializer } from "helpers";
+import Context from "providers/context";
 
 const LoginPage = () => {
   const [, { initLogin }] = useContext(Context);

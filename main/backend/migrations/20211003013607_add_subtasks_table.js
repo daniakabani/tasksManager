@@ -10,9 +10,12 @@ exports.up = function (knex) {
     table
       .integer("parent_task_id")
       .unsigned()
-      .references("users.id")
+      .references("tasks.id")
+      .notNullable()
       .onDelete("CASCADE");
-    table.string("status");
+    table.string("status", 50);
+    table.string("title", 75);
+    table.string("description", 255);
     table.timestamp("created_at");
     table.timestamp("updated_at");
     table.timestamp("deleted_at");

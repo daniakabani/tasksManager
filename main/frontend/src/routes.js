@@ -8,14 +8,9 @@ import {
 import PrivateRoute from "./pages/privateRoute";
 import NotFount from "./pages/404";
 import LoginPage from "./pages/login";
-import UsersList from "./pages/users/list";
-import UsersCreate from "./pages/users/create";
-import UsersEdit from "./pages/users/edit";
-import UsersView from "./pages/users/view";
-import CarAvailabilityList from "./pages/tasks/list";
-import CreateListing from "./pages/tasks/create";
-import ListingView from "./pages/tasks/view";
-import EditListing from "./pages/tasks/edit";
+import TasksListPage from "./pages/tasks/list";
+import CreateTask from "./pages/tasks/create";
+import TaskView from "./pages/tasks/view";
 
 const Routes = () => {
   return (
@@ -27,29 +22,14 @@ const Routes = () => {
         <Route exact path="/login">
           <LoginPage />
         </Route>
-        <PrivateRoute exact path="/users">
-          <UsersList />
-        </PrivateRoute>
-        <PrivateRoute exact path="/users/new">
-          <UsersCreate />
-        </PrivateRoute>
-        <PrivateRoute exact path="/users/:id">
-          <UsersView />
-        </PrivateRoute>
-        <PrivateRoute exact path="/users/:id/edit">
-          <UsersEdit />
-        </PrivateRoute>
         <PrivateRoute exact path="/tasks">
-          <CarAvailabilityList />
+          <TasksListPage />
         </PrivateRoute>
         <PrivateRoute exact path="/tasks/new">
-          <CreateListing />
-        </PrivateRoute>
-        <PrivateRoute exact path="/tasks/:id/edit">
-          <EditListing />
+          <CreateTask />
         </PrivateRoute>
         <PrivateRoute exact path="/tasks/:id">
-          <ListingView />
+          <TaskView />
         </PrivateRoute>
         <Route>
           <NotFount />

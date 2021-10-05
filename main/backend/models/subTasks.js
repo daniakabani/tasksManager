@@ -1,6 +1,6 @@
 const Model = require("./base");
 
-class Roles extends Model {
+class SubTasks extends Model {
   static tableName = "sub_tasks";
 
   static getTableName() {
@@ -11,28 +11,9 @@ class Roles extends Model {
     this.created_at = new Date().toISOString();
   }
 
-  static get relationMappings() {
-    const User = require("./users"),
-      SubTask = require("./subTasks");
-    return {
-      user: {
-        relation: Model.HasOneRelation,
-        modelClass: User,
-        join: {
-          from: "user.id",
-          to: "tasks.user_id",
-        },
-      },
-      subTasks: {
-        relation: Model.HasManyRelation,
-        modelClass: SubTask,
-        join: {
-          from: "tasks.id",
-          to: "sub_tasks.parent_task_id",
-        },
-      },
-    };
+  $beforeUpdate() {
+    this.updated_at = new Date().toISOString();
   }
 }
 
-module.exports = Roles;
+module.exports = SubTasks;

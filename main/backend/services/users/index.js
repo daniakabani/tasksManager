@@ -1,5 +1,6 @@
 const UsersModel = require("daniakabani/models/users"),
   bcrypt = require("bcrypt"),
+  { v4: uuidV4 } = require("uuid"),
   { randomGenerator } = require("daniakabani/helpers");
 
 exports.getAll = ({
@@ -37,6 +38,7 @@ exports.create = async ({ username, role_id, tag, password }) => {
     password: hashedPassword,
     role_id,
     tag,
+    uuid: uuidV4(),
   });
 };
 
