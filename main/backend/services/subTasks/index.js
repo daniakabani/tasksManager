@@ -1,4 +1,5 @@
 const SubTasksModel = require("daniakabani/models/subTasks"),
+  TaskService = require("daniakabani/services/tasks"),
   { v4: uuidV4 } = require("uuid");
 
 exports.getAll = ({
@@ -49,7 +50,7 @@ exports.getByUUID = ({ uuid }) => {
     .throwIfNotFound();
 };
 
-exports.updateTask = ({
+exports.updateTask = async ({
   title = "",
   description = "",
   assigned_user: assignedUser = null,
@@ -57,6 +58,15 @@ exports.updateTask = ({
   id = null,
   parent_task_id: parentTask = null,
 }) => {
+  const requiredTask = await SubTasksModel.query()
+    .findById(id)
+    .allowGraph("task")
+    .withGraphFetched("task")
+    .throwIfNotFound();
+  if (requiredTask.task.status === "completed" && status === "in-progress") {
+    await TaskService.updateTask({ ...requiredTask.task, status: "done" });
+  }
+
   return SubTasksModel.query().patchAndFetchById(id, {
     assigned_user: assignedUser,
     title,

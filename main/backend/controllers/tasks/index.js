@@ -64,7 +64,7 @@ exports.updateTask = async (req, res) => {
   } = req.body;
   await schemaValidator(updateTaskSchema, { ...req.body, ...req.params });
   res.status(OK);
-  return TasksService.updateTask({
+  return TasksService.updateTaskPropagate({
     assigned_user: assignedUser,
     status,
     title,

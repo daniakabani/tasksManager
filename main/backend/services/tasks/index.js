@@ -51,7 +51,7 @@ exports.createTask = ({
   });
 };
 
-exports.updateTask = async ({
+exports.updateTaskPropagate = async ({
   assigned_user: assignedUser = null,
   status = "in-progress",
   title = null,
@@ -79,6 +79,24 @@ exports.updateTask = async ({
     await SubTasksService.updateTask({ ...subTask, status });
   });
 
+  return TasksModel.query()
+    .whereNull("tasks.deleted_at")
+    .patchAndFetchById(id, {
+      assigned_user: assignedUser,
+      status: "completed",
+      title,
+      description,
+    })
+    .throwIfNotFound();
+};
+
+exports.updateTask = ({
+  assigned_user: assignedUser = null,
+  status = "in-progress",
+  title = null,
+  description = null,
+  id = null,
+}) => {
   return TasksModel.query()
     .whereNull("tasks.deleted_at")
     .patchAndFetchById(id, {
