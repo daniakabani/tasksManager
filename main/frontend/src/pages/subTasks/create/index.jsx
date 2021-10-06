@@ -2,10 +2,9 @@ import React from "react";
 import {
   HandleTaskCreationLogic,
   HandleUsersFetchLogic,
-  HandleTasksFetchingLogic,
   HandleSelectionsLogic,
 } from "./logic";
-import { Redirect } from "react-router-dom";
+import { Redirect, useLocation } from "react-router-dom";
 import InputField from "components/inputField";
 import Select from "react-select";
 import Button from "components/button";
@@ -14,18 +13,18 @@ import InfoBox from "components/infoBox";
 import { loadingPlaceHolder } from "localConstants";
 
 const CreateSubTask = () => {
-  const { tasksError, mainTasks } = HandleTasksFetchingLogic();
   const { users, usersError } = HandleUsersFetchLogic();
   const {
     selectedUser,
     selectedStatus,
-    selectedTask,
-    handleTaskSelection,
     handleStatusSelection,
     handleUserSelection,
   } = HandleSelectionsLogic();
   const { shouldRedirect, createLoading, createError, handleSubTaskCreation } =
     HandleTaskCreationLogic();
+
+  const { state } = useLocation();
+  const { id: taskId } = state;
 
   if (shouldRedirect) {
     return <Redirect to="/tasks" />;
@@ -42,31 +41,32 @@ const CreateSubTask = () => {
               event,
               selectedUser,
               selectedStatus,
-              selectedTask
+              taskId
             )
           }
         >
-          <InputField name="title" />
-          <textarea name="description" />
+          <label>
+            Title:
+            <InputField name="title" placeHolder="Title" required />
+          </label>
+          <label>
+            Description:
+            <textarea name="description" placeholder="Description" />
+          </label>
           <Select
             options={users ?? loadingPlaceHolder}
             className="select"
             onChange={({ value }) => handleUserSelection(value)}
+            placeholder="Select assigned user"
           />
-
           <Select
             options={statusData ?? loadingPlaceHolder}
             className="select"
             onChange={({ value }) => handleStatusSelection(value)}
-          />
-          <Select
-            options={mainTasks ?? loadingPlaceHolder}
-            className="select"
-            onChange={({ value }) => handleTaskSelection(value)}
+            placeholder="Select status"
           />
           <Button>{createLoading ? "Loading..." : "Create"}</Button>
         </form>
-        {tasksError && <InfoBox danger>{tasksError}</InfoBox>}
         {usersError && <InfoBox danger>{usersError}</InfoBox>}
         {createError && <InfoBox danger>{createError}</InfoBox>}
       </div>

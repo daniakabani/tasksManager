@@ -30,7 +30,7 @@ const LoginPage = () => {
           role: roleName,
           allowLogin: true,
         });
-        history.push("/users");
+        history.push("/tasks");
       })
       .catch((e) => console.error(e));
   };

@@ -9,6 +9,11 @@ exports.seed = async () => {
     role_id: 1,
     password: "task1234",
   });
+  await UsersService.create({
+    username: "readOnly",
+    role_id: 2,
+    password: "read1234",
+  });
   for (let start = 1; start <= 30; start++) {
     let parentTask = await TasksService.createTask({
       title: faker.commerce.productName(),

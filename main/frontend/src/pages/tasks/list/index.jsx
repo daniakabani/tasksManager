@@ -19,8 +19,11 @@ const TasksListPage = () => {
     handleStatusChange,
   } = HandleTasksLoadingLogic();
 
-  const handleRedirects = (location) => {
-    history.push(`/${location}`);
+  const handleRedirects = (location, state) => {
+    history.push({
+      pathname: `/${location}`,
+      state,
+    });
   };
 
   const handlePageChange = (page) => {
@@ -28,10 +31,6 @@ const TasksListPage = () => {
     if (pageNumber <= pageCount) {
       handleTasksPagination(pageNumber);
     }
-  };
-
-  const handleTaskDelete = () => {
-    return null;
   };
 
   if (tasksAreLoading) {
@@ -87,12 +86,7 @@ const TasksListPage = () => {
                   <div className="task-content" key={id}>
                     <header>
                       <h4>{title}</h4>
-                      <h5>
-                        Assigned to:{" "}
-                        <Link to={`/users/${assigned_user}`}>
-                          {user?.username}
-                        </Link>
-                      </h5>
+                      <h5>Assigned to: {user?.username}</h5>
                       <span>{status}</span>
                       <p>{uuid}</p>
                     </header>
@@ -123,7 +117,7 @@ const TasksListPage = () => {
                       </Button>
                       {role === "super_user" && (
                         <Button
-                          onClick={() => handleRedirects("sub-tasks")}
+                          onClick={() => handleRedirects("sub-tasks", {id})}
                           success
                         >
                           Add Sub-Task

@@ -135,6 +135,7 @@ const GlobalStyle = styled.div`
                   border-radius: 7px;
                   border: 1px solid #057bff;
                   margin: 10px 0;
+                  text-align: center;
                 }
               }
               article {
@@ -161,6 +162,7 @@ const GlobalStyle = styled.div`
                       border: 1px solid #057bff;
                       margin: 5px 0 5px 5px;
                       min-width: 75px;
+                      text-align: center;
                     }
                   }
                 }
