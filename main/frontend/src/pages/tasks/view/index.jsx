@@ -43,24 +43,36 @@ const TaskView = () => {
             )
           }
         >
-          <InputField name="title" defaultValue={taskData.title} />
-          <textarea name="description" defaultValue={taskData.description} />
-          <Select
-            options={users}
-            defaultValue={users.filter(
-              (user) => user?.value === taskData?.assigned_user
-            )}
-            className="select"
-            onChange={({ value }) => handleUserSelection(value)}
-          />
-          <Select
-            options={statusData}
-            className="select"
-            defaultValue={statusData.filter(
-              (status) => status.value === taskData.status
-            )}
-            onChange={({ value }) => handleStatusSelection(value)}
-          />
+          <label>
+            Title:
+            <InputField name="title" defaultValue={taskData.title} />
+          </label>
+          <label>
+            Description:
+            <textarea name="description" defaultValue={taskData.description} />
+          </label>
+          <label>
+            Assigned user:
+            <Select
+              options={users}
+              defaultValue={users.filter(
+                (user) => user?.value === taskData?.assigned_user
+              )}
+              className="select"
+              onChange={({ value }) => handleUserSelection(value)}
+            />
+          </label>
+          <label>
+            Status:
+            <Select
+              options={statusData}
+              className="select"
+              defaultValue={statusData.filter(
+                (status) => status.value === taskData.status
+              )}
+              onChange={({ value }) => handleStatusSelection(value)}
+            />
+          </label>
           <Button>{updateLoading ? "Loading..." : "Update"}</Button>
         </form>
         {updateError && <InfoBox danger>{updateError}</InfoBox>}

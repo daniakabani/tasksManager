@@ -4,8 +4,8 @@ import initLogin from "../handlers/initLogin";
 import logout from "../handlers/initLogout";
 
 export const INITIAL_VALUE = {
-  allowLogin: true,
-  role: "super_user",
+  allowLogin: false,
+  role: null,
 };
 
 export default function useStore(initialValue = INITIAL_VALUE) {

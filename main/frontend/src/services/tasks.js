@@ -1,8 +1,14 @@
 import { HttpClient } from "helpers";
 
-const getAllTasks = (page = 1, status = "in-progress") => {
+const getAllTasks = ({
+  page = 1,
+  status = "in-progress",
+  per_page: perPage = 50,
+}) => {
   return HttpClient({
-    path: `tasks?page_size=20&page=${page}&status=${status}`,
+    path: `tasks?page=${page}&status=${status}&page_size=${Number(
+      perPage
+    )}`,
     method: "GET",
   });
 };

@@ -20,14 +20,25 @@ const CreateTask = () => {
           <h1>Create a new Task</h1>
         </header>
         <form onSubmit={(e) => handleTaskCreation(assignedUser, e)}>
-          <InputField name="title" placeHolder="title" type="string" required />
-          <textarea name="description" placeholder="description" />
-          <Select
-            placeholder="Assigned user"
-            options={users ?? []}
-            onChange={({ value }) => handleUserSelection(value)}
-            className="select"
-          />
+          <label>
+            title:
+            <InputField name="title" placeHolder="title" type="string" required />
+          </label>
+          <label>
+            Description:
+            <textarea name="description" placeholder="description" />
+          </label>
+          <label htmlFor="assigned">
+            Assigned User
+            <Select
+              placeholder="Assigned user"
+              options={users ?? []}
+              onChange={({ value }) => handleUserSelection(value)}
+              className="select"
+              label="Assigned user"
+              id="assigned-user"
+            />
+          </label>
           <Button>{isLoading ? "Loading..." : "Create"}</Button>
         </form>
       </div>

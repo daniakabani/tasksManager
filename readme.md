@@ -1,4 +1,4 @@
-# Car Rent MarketPlace
+# Tasks Manager
 this is a fullstack project using node.js, express, knex, objection, react among others, the goal of this project is to simulate a dashboard experience to the user with controlled access and features based on roles.
 
 Before we start, make sure you have node.js version 12.x.x or higher, and make sure that knex is installed globally `npm i -g knex`

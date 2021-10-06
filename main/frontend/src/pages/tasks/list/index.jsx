@@ -2,11 +2,9 @@ import React, { useContext } from "react";
 import { useHistory, Link } from "react-router-dom";
 import Context from "providers/context";
 import Button from "components/button";
-import constants from "localConstants";
+import { statuses } from "localConstants";
 import ReactPaginate from "react-paginate";
 import { HandleTasksLoadingLogic } from "./logic";
-
-const { statuses } = constants;
 
 const TasksListPage = () => {
   const [{ role }] = useContext(Context);
@@ -55,7 +53,9 @@ const TasksListPage = () => {
         <div className="content">
           <header>
             <h1>Current Tasks</h1>
-            <Link to="/tasks/new">Create new task</Link>
+            {role === "super_user" && (
+              <Link to="/tasks/new">Create new task</Link>
+            )}
           </header>
           <div className="filters">
             <h5>Filters</h5>
@@ -86,27 +86,28 @@ const TasksListPage = () => {
                 }) => (
                   <div className="task-content" key={id}>
                     <header>
-                      <h4>
-                        {title} <span>{status}</span>
-                      </h4>
+                      <h4>{title}</h4>
                       <h5>
                         Assigned to:{" "}
                         <Link to={`/users/${assigned_user}`}>
                           {user?.username}
                         </Link>
                       </h5>
+                      <span>{status}</span>
+                      <p>{uuid}</p>
                     </header>
                     <article>
+                      <h6>Description</h6>
                       <p>{description}</p>
                     </article>
                     <div className="subs">
                       <h5>Sub tasks dependencies</h5>
                       <ul>
-                        {subTasks.map(({ uuid, title, status }) => {
+                        {subTasks.map(({ uuid, title, status, id: subId }) => {
                           return (
                             <li key={uuid}>
-                              <Link to={`sub-tasks/${id}`}>
-                                {title} - {status}
+                              <Link to={`sub-tasks/${subId}`}>
+                                {title} <span>{status}</span>
                               </Link>
                             </li>
                           );
@@ -120,14 +121,12 @@ const TasksListPage = () => {
                       >
                         View
                       </Button>
-                      <Button
-                        success
-                      >
-                        Add Sub-Task
-                      </Button>
                       {role === "super_user" && (
-                        <Button onClick={() => handleTaskDelete(id)} danger>
-                          Delete
+                        <Button
+                          onClick={() => handleRedirects("sub-tasks")}
+                          success
+                        >
+                          Add Sub-Task
                         </Button>
                       )}
                     </div>

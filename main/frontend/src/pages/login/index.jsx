@@ -52,7 +52,7 @@ const LoginPage = () => {
             type="password"
             required
           />
-          <Button content="Login" />
+          <Button>Login</Button>
         </form>
       </div>
     </div>

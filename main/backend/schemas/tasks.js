@@ -3,7 +3,11 @@ const joi = require("joi");
 exports.getAll = {
   schema: () => {
     return joi.object().keys({
-      status: joi.string().optional().valid("in-progress", "done", "completed"),
+      status: joi
+        .string()
+        .optional()
+        .valid("in-progress", "done", "completed")
+        .allow(null, ""),
       page: joi.number().positive().optional(),
       page_size: joi.number().positive().optional().allow(null, ""),
     });

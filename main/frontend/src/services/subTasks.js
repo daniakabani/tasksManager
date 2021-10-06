@@ -2,14 +2,14 @@ import { HttpClient } from "helpers";
 
 const getSubTaskById = (id) => {
   return HttpClient({
-    path: `tasks/${id}`,
+    path: `subtasks/${id}`,
     method: "GET",
   });
 };
 
 const createSubTask = (body) => {
   return HttpClient({
-    path: `tasks`,
+    path: `subtasks`,
     method: "POST",
     body,
   });
@@ -17,10 +17,10 @@ const createSubTask = (body) => {
 
 const editSubTask = ({ id, body }) => {
   return HttpClient({
-    path: `tasks/${id}`,
+    path: `subtasks/${id}`,
     method: "POST",
     body,
   });
 };
 
-export { createSubTask, editSubTask, getSubTaskById };
+export { getSubTaskById, createSubTask, editSubTask };

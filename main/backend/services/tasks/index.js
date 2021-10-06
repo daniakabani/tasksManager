@@ -1,15 +1,22 @@
 const TasksModel = require("daniakabani/models/tasks"),
+  SubTasksService = require("daniakabani/services/subTasks"),
   { errorHandler } = require("daniakabani/utilities"),
   { v4: uuidV4 } = require("uuid");
 
-exports.getAll = ({ page = 1, page_size = 20, status = null }) => {
+exports.getAll = ({
+  page = 1,
+  page_size: pageSize = 20,
+  status = "in-progress",
+  title = null,
+}) => {
   const result = TasksModel.query()
     .allowGraph("[subTasks, user]")
     .withGraphFetched("[subTasks, user]")
     .whereNull("tasks.deleted_at");
   status && result.where("status", "like", status);
+  title && result.where("title", "like", title);
   result.orderBy("created_at", "desc");
-  result.page(Number(page) - 1, page_size);
+  result.page(Number(page) - 1, pageSize);
   return result;
 };
 
@@ -53,6 +60,8 @@ exports.updateTask = async ({
 }) => {
   const requiredTask = await TasksModel.query()
     .findById(id)
+    .allowGraph("subTasks")
+    .withGraphFetched("subTasks")
     .whereNull("tasks.deleted_at")
     .throwIfNotFound();
   if (
@@ -66,6 +75,10 @@ exports.updateTask = async ({
         "A main task can't be reverted back to in-progress after it is marked as done",
     });
   }
+  requiredTask.subTasks.map(async (subTask) => {
+    await SubTasksService.updateTask({ ...subTask, status });
+  });
+
   return TasksModel.query()
     .whereNull("tasks.deleted_at")
     .patchAndFetchById(id, {

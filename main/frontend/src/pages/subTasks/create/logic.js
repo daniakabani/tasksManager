@@ -1,28 +1,8 @@
 import { useState, useEffect } from "react";
-import { getSubTaskById, editSubTask } from "services/subTasks";
+import { getSubTaskById, createSubTask } from "services/subTasks";
 import { getAllTasks } from "services/tasks";
 import { getAllUsers } from "services/users";
 import { defaultErrorMessageInvoker, FormSerializer } from "helpers";
-
-const HandleSubTaskFetchingLogic = (id) => {
-  const [subTaskData, setSub] = useState(null);
-  const [subError, setError] = useState(null);
-
-  useEffect(() => {
-    getSubTaskById(id)
-      .then((res) => {
-        setSub(res);
-      })
-      .catch((e) => {
-        console.error(e);
-        setError(defaultErrorMessageInvoker("Sub-Task"));
-      });
-  }, []);
-  return {
-    subTaskData,
-    subError,
-  };
-};
 
 const HandleTasksFetchingLogic = () => {
   const [mainTasks, setTasks] = useState(null);
@@ -101,49 +81,44 @@ const HandleSelectionsLogic = () => {
   };
 };
 
-const HandleSubTaskUpdatingLogic = () => {
+const HandleTaskCreationLogic = () => {
   const [shouldRedirect, setRedirect] = useState(false);
-  const [updateLoading, setLoading] = useState(false);
-  const [updateError, setError] = useState(null);
+  const [createLoading, setLoading] = useState(false);
+  const [createError, setError] = useState(null);
 
-  const handleSubTaskUpdate = (
+  const handleSubTaskCreation = (
     event,
     selectedUser,
     selectedStatus,
     selectedTask,
-    id
   ) => {
     event.preventDefault();
     const { title, description } = FormSerializer(event.currentTarget);
     setLoading(true);
-    editSubTask({
-      id,
-      body: {
-        assigned_user: selectedUser,
-        status: selectedStatus,
-        parent_task_id: selectedTask,
-        title,
-        description,
-      },
+    createSubTask({
+      assigned_user: selectedUser,
+      status: selectedStatus,
+      parent_task_id: selectedTask,
+      title,
+      description,
     })
       .then(() => {
         setRedirect(true);
       })
       .catch((e) => {
         console.error(e);
-        setError("something went wrong while updating");
+        setError("something went wrong while creating your subtask");
       })
       .finally(() => {
         setLoading(false);
       });
   };
 
-  return { shouldRedirect, updateError, updateLoading, handleSubTaskUpdate };
+  return { shouldRedirect, createError, createLoading, handleSubTaskCreation };
 };
 
 export {
-  HandleSubTaskFetchingLogic,
-  HandleSubTaskUpdatingLogic,
+  HandleTaskCreationLogic,
   HandleUsersFetchLogic,
   HandleTasksFetchingLogic,
   HandleSelectionsLogic,

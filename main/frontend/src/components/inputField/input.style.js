@@ -16,6 +16,7 @@ const InputFieldStyle = styled.div`
         font-weight: 300;
         transition: 0.3s ease all;
         margin-bottom: 20px;
+        margin-top: 5px;
         &::placeholder {
           color: #bcbcbc;
         }

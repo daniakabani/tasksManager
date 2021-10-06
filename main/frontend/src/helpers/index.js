@@ -1,6 +1,6 @@
 const HttpClient = async ({ method, path, body = null }) => {
   try {
-    let result = await fetch(`http://localhost:8000/api/v1/${path}`, {
+    let response = await fetch(`http://localhost:8000/api/v1/${path}`, {
       method: method,
       mode: "cors",
       cache: "no-cache",
@@ -11,12 +11,10 @@ const HttpClient = async ({ method, path, body = null }) => {
       referrerPolicy: "no-referrer",
       body: body && JSON.stringify({ ...body }),
     });
-    let jsonResult = await result?.json();
-    if (jsonResult?.error) {
-      throw jsonResult;
-    } else {
-      return jsonResult;
+    if (!response.ok) {
+      throw await response.json();
     }
+    return await response.json();
   } catch (e) {
     throw e;
   }
@@ -34,4 +32,13 @@ const confirmMessage = (message) => {
   return window.confirm(message);
 };
 
-export { HttpClient, FormSerializer, confirmMessage };
+const defaultErrorMessageInvoker = (resourceName) => {
+  return `Uh-Oh, Looks like we are having trouble loading your ${resourceName} now, please try again later`;
+};
+
+export {
+  HttpClient,
+  FormSerializer,
+  confirmMessage,
+  defaultErrorMessageInvoker,
+};

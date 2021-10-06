@@ -6,11 +6,7 @@ const statusData = [
   {
     label: "Done",
     value: "done",
-  },
-  {
-    label: "Completed",
-    value: "completed",
-  },
+  }
 ];
 
 export default statusData;

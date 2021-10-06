@@ -23,8 +23,8 @@ const GlobalStyle = styled.div`
           margin-bottom: 20px;
         }
         form {
-          .select,
-          .tags {
+          .select{
+            margin-top: 5px;
             margin-bottom: 20px;
           }
           textarea {
@@ -38,6 +38,7 @@ const GlobalStyle = styled.div`
             font-weight: 300;
             transition: 0.3s ease all;
             margin-bottom: 20px;
+            margin-top: 5px;
             &::placeholder {
               color: #bcbcbc;
             }
@@ -112,7 +113,7 @@ const GlobalStyle = styled.div`
               transition: ease all 0.3s;
               display: flex;
               align-items: flex-start;
-              justify-content: flex-start;
+              justify-content: space-around;
               position: relative;
               overflow: hidden;
               header {
@@ -121,22 +122,24 @@ const GlobalStyle = styled.div`
                 align-items: flex-start;
                 justify-content: flex-start;
                 margin-right: 20px;
+                max-width: 250px;
                 h4 {
                   display: flex;
                   align-items: center;
-                  span {
-                    display: block;
-                    font-size: 12px;
-                    padding: 5px;
-                    border-radius: 7px;
-                    border: 1px solid #057bff;
-                    margin-left: 5px;
-                  }
+                  margin-bottom: 10px;
+                }
+                span {
+                  display: block;
+                  font-size: 12px;
+                  padding: 5px;
+                  border-radius: 7px;
+                  border: 1px solid #057bff;
+                  margin: 10px 0;
                 }
               }
               article {
                 margin-right: 20px;
-                max-width: 265px;
+                max-width: 250px;
                 width: 100%;
               }
               .subs {
@@ -144,6 +147,22 @@ const GlobalStyle = styled.div`
                 ul {
                   margin-top: 10px;
                   list-style: none;
+                  li a {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                    max-width: 300px;
+                    span {
+                      display: block;
+                      font-size: 12px;
+                      padding: 5px;
+                      border-radius: 7px;
+                      border: 1px solid #057bff;
+                      margin: 5px 0 5px 5px;
+                      min-width: 75px;
+                    }
+                  }
                 }
               }
               h2,
@@ -153,10 +172,11 @@ const GlobalStyle = styled.div`
               .actions {
                 display: flex;
                 align-items: center;
-                justify-content: flex-start;
+                justify-content: center;
+                flex-direction: column;
                 margin-top: 20px;
                 > div {
-                  margin-right: 10px;
+                  margin-bottom: 10px;
                 }
               }
             }

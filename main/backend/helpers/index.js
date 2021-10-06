@@ -35,6 +35,7 @@ exports.expressCallback = (controller) => {
         console.warn("SQL error");
         console.error(e);
         res.status(409).send({
+          error: "Failed to execute your query",
           message: e.nativeError.detail,
         });
       } else if (e.name === "Validation Error") {

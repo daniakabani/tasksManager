@@ -10,6 +10,7 @@ const HandleTaskFetchingLogic = (id = null) => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelected] = useState(null);
   const [selectedStatus, setStatus] = useState(null);
+
   useEffect(() => {
     setLoading(true);
     const promisesArray = [getTaskById(id), getAllUsers({})];
@@ -36,12 +37,15 @@ const HandleTaskFetchingLogic = (id = null) => {
         setLoading(false);
       });
   }, []);
+
   const handleUserSelection = (value) => {
     setSelected(value);
   };
+
   const handleStatusSelection = (value) => {
     setStatus(value);
   };
+
   return {
     taskData,
     isLoading,
@@ -72,8 +76,7 @@ const HandleTaskUpdatingLogic = () => {
         status: selectedStatus,
       },
     })
-      .then((res) => {
-        console.log("passed", res);
+      .then(() => {
         setRedirect(true);
       })
       .catch((e) => {
